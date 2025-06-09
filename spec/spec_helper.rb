@@ -7,7 +7,6 @@ require "pry-byebug"
 require "rspec/its"
 
 require_relative "support/simplecov"
-require_relative "../boot/start"
 
 RSpec.configure do |config|
   config.filter_run_when_matching :focus
@@ -21,4 +20,4 @@ end
 Dir["#{__dir__}/support/**/*.rb"].each { |f| require f }
 
 require "foobara/spec_helpers/all"
-require_relative "../boot/finish"
+require "foobara/spec_helpers/it_behaves_like_a_crud_driver"

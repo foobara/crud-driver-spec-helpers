@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    foobara-crud-driver-spec-helpers (0.0.1)
+    foobara-crud-driver-spec-helpers (1.0.0)
       foobara (~> 0.0.94)
 
 GEM
@@ -104,7 +104,7 @@ GEM
     foobara-resque-scheduler-connector-generator (0.0.2)
       foobara
       foobara-files-generator
-    foobara-rubocop-rules (0.0.10)
+    foobara-rubocop-rules (1.0.0)
       rubocop
       rubocop-rspec
     foobara-sh-cli-connector (0.0.17)
@@ -265,7 +265,7 @@ DEPENDENCIES
   foob
   foobara-crud-driver-spec-helpers!
   foobara-dotenv-loader (~> 0.0.1)
-  foobara-rubocop-rules (~> 0.0.1)
+  foobara-rubocop-rules (~> 1.0.0)
   foobara-spec-helpers (~> 0.0.1)
   guard-rspec
   irb
