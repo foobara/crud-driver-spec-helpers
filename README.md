@@ -1,29 +1,34 @@
-# 
+# CRUD Driver Spec Helpers
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library
-into a gem. Put your Ruby code in the file `lib/foobara/empty_ruby_project_generator`. To experiment with that code,
-run `bin/console` for an interactive prompt.
-
+This gem can be used by developers of Foobara CRUD drivers to ensure adherence to the CRUD Driver interface.
 
 ## Installation
 
-Typical stuff: add `gem "foobara-crud-driver-spec-helpers"` to your Gemfile or .gemspec file. Or even just
-`gem install foobara-crud-driver-spec-helpers` if just playing with it directly in scripts.
+Add `gem "foobara-crud-driver-spec-helpers"` to the :test group of your Gemfile.
 
 ## Usage
 
-TODO: Write usage instructions here
+In a spec file, you can do something like:
 
 ```ruby
-#!/usr/bin/env ruby
+require "foobara/spec_helpers/it_behaves_like_a_crud_driver"
 
-require "foobara/load_dotenv"
-Foobara::LoadDotenv.run!(dir: __dir__)
+RSpec.describe Foobara::SomeCrudDriver do
+  after { Foobara.reset_alls }
 
-TODO: some example code
+  let(:crud_driver) { described_class.new }
+
+  before do
+    Foobara::Persistence.default_crud_driver = crud_driver
+  end
+
+  it_behaves_like_a_crud_driver
+end
 ```
+
+NOTE: If you are using a crud driver that requires strong typing, like the foobara-postgresql-crud-driver,
+you will need to create the tables needed in a `before` block. See that gem's spec for an example.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub
