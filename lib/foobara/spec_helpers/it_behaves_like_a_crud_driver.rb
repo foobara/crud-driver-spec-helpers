@@ -806,6 +806,8 @@ module RspecHelpers
                 expect(entity_class.find_by(foo: "22")).to eq(entity2)
                 expect(entity_class.find_by(foo: "55")).to eq(entity5)
 
+                expect(table.find_by(foo: "22")[:pk]).to eq(entity2.pk)
+
                 expect(entity_class.find_many_by(foo: "11").to_a).to eq([entity1])
                 expect(entity_class.find_many_by(foo: "66").to_a).to eq([entity6])
                 expect(entity_class.find_many_by(bar: "basil").to_a).to eq([entity7, entity8, entity3, entity4])
