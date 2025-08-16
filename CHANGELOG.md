@@ -1,3 +1,7 @@
+## [1.0.2] - 2025-08-16
+
+- Add missing base64 dependency
+
 ## [1.0.1] - 2025-06-26
 
 - Make sure we hit the Table#find_by code path
