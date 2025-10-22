@@ -1,3 +1,7 @@
+## [1.1.0] - 2025-10-21
+
+- Add examples for prefix behavior
+
 ## [1.0.2] - 2025-08-16
 
 - Add missing base64 dependency

@@ -8,9 +8,47 @@ module RspecHelpers
           entity_class.current_transaction_table.entity_attributes_crud_driver_table
         end
 
+        let(:driver) { entity_class.entity_base.entity_attributes_crud_driver }
+        let(:driver_class) { driver.class }
+
         describe ".has_real_transactions?" do
           it "is a boolean" do
             expect([true, false]).to include(described_class.has_real_transactions?)
+          end
+        end
+
+        describe "#table_for" do
+          context "when using a prefix" do
+            let(:prefix) { "some_prefix" }
+            let(:prefixed_crud_driver) { driver_class.new(prefix:) }
+            let(:entity_class) do
+              stub_module("SomeOrg") { foobara_organization! }
+              stub_module("SomeOrg::SomeDomain") { foobara_domain! }
+              stub_class("SomeOrg::SomeDomain::SomeEntity", Foobara::Entity) do
+                attributes do
+                  id :integer
+                  foo :integer
+                  bar :symbol
+                  created_at :datetime, :allow_nil
+                end
+
+                primary_key :id
+              end
+            end
+
+            it "includes the prefix in the table name" do
+              table = prefixed_crud_driver.table_for(entity_class)
+              expect(table.table_name).to eq("some_prefix_some_entity")
+            end
+
+            context "when prefix is true" do
+              let(:prefix) { true }
+
+              it "uses the org and domain as the prefix" do
+                table = prefixed_crud_driver.table_for(entity_class)
+                expect(table.table_name).to eq("some_org_some_domain_some_entity")
+              end
+            end
           end
         end
 
@@ -551,8 +589,6 @@ module RspecHelpers
           end
 
           describe "#all" do
-            let(:driver) { entity_class.entity_base.entity_attributes_crud_driver }
-
             context "when using string ids" do
               let(:entity_class) do
                 stub_class("SomeEntityStringId", Foobara::Entity) do
