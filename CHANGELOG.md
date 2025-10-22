@@ -1,3 +1,7 @@
+## [1.1.1] - 2025-10-21
+
+- prefix: has been renamed table_prefix:
+
 ## [1.1.0] - 2025-10-21
 
 - Add examples for prefix behavior

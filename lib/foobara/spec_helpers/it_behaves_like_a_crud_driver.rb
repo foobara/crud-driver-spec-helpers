@@ -18,9 +18,9 @@ module RspecHelpers
         end
 
         describe "#table_for" do
-          context "when using a prefix" do
-            let(:prefix) { "some_prefix" }
-            let(:prefixed_crud_driver) { driver_class.new(prefix:) }
+          context "when using a table_prefix" do
+            let(:table_prefix) { "some_prefix" }
+            let(:prefixed_crud_driver) { driver_class.new(table_prefix:) }
             let(:entity_class) do
               stub_module("SomeOrg") { foobara_organization! }
               stub_module("SomeOrg::SomeDomain") { foobara_domain! }
@@ -36,15 +36,15 @@ module RspecHelpers
               end
             end
 
-            it "includes the prefix in the table name" do
+            it "includes the table_prefix in the table name" do
               table = prefixed_crud_driver.table_for(entity_class)
               expect(table.table_name).to eq("some_prefix_some_entity")
             end
 
-            context "when prefix is true" do
-              let(:prefix) { true }
+            context "when table_prefix is true" do
+              let(:table_prefix) { true }
 
-              it "uses the org and domain as the prefix" do
+              it "uses the org and domain as the table_prefix" do
                 table = prefixed_crud_driver.table_for(entity_class)
                 expect(table.table_name).to eq("some_org_some_domain_some_entity")
               end
