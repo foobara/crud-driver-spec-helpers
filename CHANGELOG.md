@@ -1,3 +1,7 @@
+## [1.1.2] - 2025-11-09
+
+- Test a direct entity -> entity association
+
 ## [1.1.1] - 2025-10-21
 
 - prefix: has been renamed table_prefix:

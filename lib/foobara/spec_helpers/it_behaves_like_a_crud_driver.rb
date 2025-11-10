@@ -487,6 +487,7 @@ module RspecHelpers
                   id :integer
                   foo :integer
                   some_model SomeModel, :required
+                  some_entity SomeEntity, :required
                   some_entities [SomeEntity]
                 end
 
@@ -528,6 +529,7 @@ module RspecHelpers
               entity_class.transaction do
                 some_entity3 = entity_class.create(foo: 11, bar: :baz, id: 102)
                 some_entity4 = entity_class.create(foo: 11, bar: :baz)
+                some_entity5 = entity_class.create(foo: 21, bar: :bazbaz)
                 some_other_entity = SomeOtherEntity.create(foo: 11)
 
                 some_model = SomeModel.new(some_other_entity:)
@@ -535,6 +537,7 @@ module RspecHelpers
                 aggregate_class.create(
                   foo: 30,
                   some_model:,
+                  some_entity: some_entity5,
                   some_entities: [
                     1,
                     some_entity1,
@@ -560,6 +563,7 @@ module RspecHelpers
 
                 new_aggregate = aggregate_class.create(
                   foo: "30",
+                  some_entity: entity_class.create(foo: 31, bar: :bazbazbaz),
                   some_entities: [
                     entity_class.create(foo: 11, bar: :baz)
                   ],
